@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -13,9 +14,12 @@ namespace MovieListApp
     [DesignTimeVisible(false)]
     public partial class MainPage : ContentPage
     {
+        public ObservableCollection<string> movieItems = new ObservableCollection<string>();
+
         public MainPage()
         {
             InitializeComponent();
+            MyListView.ItemsSource = movieItems;
         }
 
         private async void OnClick(object sender, EventArgs e)
@@ -27,6 +31,7 @@ namespace MovieListApp
             else
             {
                 await DisplayAlert("Movie added", "Movie - " + MovieEntry.Text, "OK");
+                movieItems.Add(MovieEntry.Text);
             }
         }
     }
