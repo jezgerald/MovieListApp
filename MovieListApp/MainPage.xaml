@@ -3,8 +3,27 @@
     <StackLayout>
         <!-- Place new controls here -->
         <Entry Placeholder="Enter a movie title" x:Name="MovieEntry"/>
-        <Button Text="Done" Clicked="OnClick"/>
-        <ListView x:Name= "MyListView"/>
+        <Button Text="Add to list" Clicked="OnClick"/>
+        <!--<Button Text="Sort A-Z" Clicked="Sort" />-->
+
+        <ListView x:Name= "MyListView" IsPullToRefreshEnabled="True" >
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <ViewCell>
+                        <StackLayout>
+                            <Label Text="{Binding .}" FontSize="20" TextColor="#336699" />
+                        </StackLayout>
+                        
+                        <ViewCell.ContextActions>
+                            <MenuItem Clicked="OnMore" CommandParameter="{Binding .}"
+                            Text="Watched" />
+                            <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
+                               Text="Delete" IsDestructive="True" />
+                         </ViewCell.ContextActions>
+                    </ViewCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
 
     </StackLayout>
 </ContentPage>
