@@ -25,6 +25,7 @@ namespace MovieListApp
 
             InitializeComponent();
             MyListView.ItemsSource = movieItems;
+            
         }
 
         private async void OnClick(object sender, EventArgs e)
@@ -41,38 +42,22 @@ namespace MovieListApp
             }
         }
 
-        // no longer using
-        //public void OnMore(object sender, EventArgs e)
-        //{
-        //    var mi = ((MenuItem)sender);
-        //    DisplayAlert("Watched", "Mark " + mi.CommandParameter + " as watched?", "OK");
-
-        //    var strikethroughLabel = new Label { Text = "This is text with strikethrough.", TextDecorations = TextDecorations.Strikethrough };
-        //    MyListVi        ew.SelectedItem = strikethroughLabel;
-
-        //    //var layout = new StackLayout { Padding = new Thickness(5, 10) };
-        //    //var label = new Label { Text = "This is a green label.", TextColor = Color.FromHex("#77d065"), FontSize = 20 };
-        //    //layout.Children.Add(label);
-        //    //this.Content = layout;
-        //}
 
         public void OnDelete(object sender, EventArgs e)
         {
             var mi = ((MenuItem)sender);
-            DisplayAlert("Delete?", "Delete " + mi.CommandParameter + " from list?", "OK");
-
-            MyListView.SelectedItem = mi;
-            movieItems.Remove((string)MyListView.SelectedItem);
+            DisplayAlert("Delete?", "Delete " + mi.CommandParameter + " from list?", "OK", "Cancel");
+            var item = (string)mi.CommandParameter;
+            movieItems.Remove(item);
         }
 
-        private void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
+        private void SearchBar_OnTextChanged (object sender, TextChangedEventArgs e)
         {
             MyListView.BeginRefresh();
 
             if (string.IsNullOrWhiteSpace(e.NewTextValue))
             {
-                DisplayAlert("Error", "List needs items to search!", "OK");
-                MyListView.ItemsSource = movieItems;
+                DisplayAlert("Error", "Please type a title to search for", "OK");
             }
             else
             {
@@ -81,22 +66,34 @@ namespace MovieListApp
 
             MyListView.EndRefresh();
         }
-
-        // Sort function - NOT WORKING
-        //private async void Sort(object sender, EventArgs e)
-        //{
-        //    MyListView.BeginRefresh();
-
-        //    if (movieItems.Count == 0)
-        //    {
-        //        await DisplayAlert("Cannot sort", "No items available to sort", "OK");
-        //    }
-        //    else
-        //    {
-        //        movieItems = new ObservableCollection<string>(movieItems.OrderBy(a => a));
-        //    }
-
-        //    MyListView.EndRefresh();
-        //}
     }
 }
+
+// no longer using
+//public void OnMore(object sender, EventArgs e)
+//{
+//    var mi = ((MenuItem)sender);
+//    DisplayAlert("Watched", "Mark " + mi.CommandParameter + " as watched?", "OK");
+
+//    var strikethroughLabel = new Label { Text = "This is text with strikethrough.", TextDecorations = TextDecorations.Strikethrough };
+//    MyListVi        ew.SelectedItem = strikethroughLabel;
+
+//    //var layout = new StackLayout { Padding = new Thickness(5, 10) };
+//    //var label = new Label { Text = "This is a green label.", TextColor = Color.FromHex("#77d065"), FontSize = 20 };
+//    //layout.Children.Add(label);
+//    //this.Content = layout;
+//}
+
+// NOT WORKING
+//private async void Sort(object sender, EventArgs e)
+//{
+//    if (movieItems.Count == 0)
+//    {
+//        await DisplayAlert("Cannot sort", "No items available to sort", "OK");
+//    }
+//    else
+//    {
+//        movieItems = new ObservableCollection<string>(movieItems.OrderBy(a => a));
+//    }
+//    MyListView.EndRefresh();
+//}

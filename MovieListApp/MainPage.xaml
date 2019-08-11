@@ -3,19 +3,20 @@
     <StackLayout>
         <!-- Place new controls here -->
         <Label Text="My Movie List"
-                   Style="{DynamicResource TitleStyle}"
-                   HeightRequest="40"
-                   BackgroundColor="#336699"
-                   TextColor="#ffffff"
-                   FontSize="Title"
-                   HorizontalTextAlignment="Center" />
-        <SearchBar Placeholder="Search movies..." Text="{Binding SearchText}" TextChanged="SearchBar_OnTextChanged" />
+               Style="{DynamicResource TitleStyle}"
+               HeightRequest="40"
+               BackgroundColor="#336699"
+               TextColor="#ffffff"
+               FontSize="Title"
+               HorizontalTextAlignment="Center" />
+        <SearchBar Placeholder="Search for a movie..."
+                   Text="{Binding SearchText}"
+                   TextChanged="SearchBar_OnTextChanged"/>
 
         <Entry Placeholder="Enter a movie title" x:Name="MovieEntry"/>
-        <Button Text="Add to list" Clicked="OnClick"/>
-        <!--<Button Text="Sort A-Z" Clicked="Sort" />-->
+        <Button Text="Add movie to list" Clicked="OnClick"/>
 
-        <ListView x:Name= "MyListView" > <!-- IsPullToRefreshEnabled="True" Refreshing="Sort" -->
+        <ListView x:Name= "MyListView" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -24,10 +25,10 @@
                         </StackLayout>
                         
                         <ViewCell.ContextActions>
-                            <!--<MenuItem Clicked="OnMore" CommandParameter="{Binding .}"
-                            Text="Watched" />-->
-                            <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
-                               Text="Delete" IsDestructive="True" />
+                            <MenuItem Clicked="OnDelete"
+                                      CommandParameter="{Binding .}"
+                                      Text="Delete"
+                                      IsDestructive="True" />
                          </ViewCell.ContextActions>
                     </ViewCell>
                 </DataTemplate>
