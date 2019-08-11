@@ -2,6 +2,7 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="MovieListApp.MainPage">
     <StackLayout>
         <!-- Place new controls here -->
+        <!-- Title bar -->
         <Label Text="My Movie List"
                Style="{DynamicResource TitleStyle}"
                HeightRequest="40"
@@ -9,21 +10,29 @@
                TextColor="#ffffff"
                FontSize="Title"
                HorizontalTextAlignment="Center" />
+
+        <!-- Search bar -->
         <SearchBar Placeholder="Search for a movie..."
                    Text="{Binding SearchText}"
                    TextChanged="SearchBar_OnTextChanged"/>
 
+        <!-- Entry text field to add a movie title -->
         <Entry Placeholder="Enter a movie title" x:Name="MovieEntry"/>
+
+        <!-- Button to add title to list -->
         <Button Text="Add movie to list" Clicked="OnClick"/>
 
+        <!-- MyListView -->
         <ListView x:Name= "MyListView" >
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <StackLayout>
+                            <!-- Label showing the added movie title -->
                             <Label Text="{Binding .}" FontSize="20" TextColor="#336699" />
                         </StackLayout>
-                        
+
+                        <!-- Cell to show delete option when swiped (iOS) or pressed down (Android) -->
                         <ViewCell.ContextActions>
                             <MenuItem Clicked="OnDelete"
                                       CommandParameter="{Binding .}"
