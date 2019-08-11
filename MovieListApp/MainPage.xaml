@@ -2,11 +2,20 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms" xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" xmlns:d="http://xamarin.com/schemas/2014/forms/design" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="MovieListApp.MainPage">
     <StackLayout>
         <!-- Place new controls here -->
+        <Label Text="My Movie List"
+                   Style="{DynamicResource TitleStyle}"
+                   HeightRequest="40"
+                   BackgroundColor="#336699"
+                   TextColor="#ffffff"
+                   FontSize="Title"
+                   HorizontalTextAlignment="Center" />
+        <SearchBar Placeholder="Search movies..." Text="{Binding SearchText}" TextChanged="SearchBar_OnTextChanged" />
+
         <Entry Placeholder="Enter a movie title" x:Name="MovieEntry"/>
         <Button Text="Add to list" Clicked="OnClick"/>
         <!--<Button Text="Sort A-Z" Clicked="Sort" />-->
 
-        <ListView x:Name= "MyListView" IsPullToRefreshEnabled="True" >
+        <ListView x:Name= "MyListView" > <!-- IsPullToRefreshEnabled="True" Refreshing="Sort" -->
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
@@ -15,8 +24,8 @@
                         </StackLayout>
                         
                         <ViewCell.ContextActions>
-                            <MenuItem Clicked="OnMore" CommandParameter="{Binding .}"
-                            Text="Watched" />
+                            <!--<MenuItem Clicked="OnMore" CommandParameter="{Binding .}"
+                            Text="Watched" />-->
                             <MenuItem Clicked="OnDelete" CommandParameter="{Binding .}"
                                Text="Delete" IsDestructive="True" />
                          </ViewCell.ContextActions>
