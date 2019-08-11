@@ -53,12 +53,20 @@ namespace MovieListApp
 
         // OnDelete - responds to user swiping (iOS) or holding down (Android) on an item in the listview (Delete button in MainPage.xaml)
         // Allows user to delete entry from listview and movieItems 
-        public void OnDelete(object sender, EventArgs e)
+        public async void OnDelete(object sender, EventArgs e)
         {
             var mi = ((MenuItem)sender);
-            DisplayAlert("Delete?", "Delete " + mi.CommandParameter + " from list?", "OK", "Cancel");
+            var answer = await DisplayAlert("Delete?", "Delete " + mi.CommandParameter + " from list?", "OK", "Cancel");
             var item = (string)mi.CommandParameter;
-            movieItems.Remove(item);
+
+            if (answer.Equals(false))
+            {
+                return;
+            }
+            else
+            {
+                movieItems.Remove(item);
+            }
         }
 
         // SearchBar_OnTextChanged - responds to SearchBar in MainPage.xaml
