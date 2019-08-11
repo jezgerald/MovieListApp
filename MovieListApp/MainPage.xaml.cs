@@ -41,14 +41,28 @@ namespace MovieListApp
             }
         }
 
+        // no longer using
+        //public void OnMore(object sender, EventArgs e)
+        //{
+        //    var mi = ((MenuItem)sender);
+        //    DisplayAlert("Watched", "Mark " + mi.CommandParameter + " as watched?", "OK");
+
+        //    var strikethroughLabel = new Label { Text = "This is text with strikethrough.", TextDecorations = TextDecorations.Strikethrough };
+        //    MyListVi        ew.SelectedItem = strikethroughLabel;
+
+        //    //var layout = new StackLayout { Padding = new Thickness(5, 10) };
+        //    //var label = new Label { Text = "This is a green label.", TextColor = Color.FromHex("#77d065"), FontSize = 20 };
+        //    //layout.Children.Add(label);
+        //    //this.Content = layout;
+        //}
 
         public void OnDelete(object sender, EventArgs e)
         {
             var mi = ((MenuItem)sender);
             DisplayAlert("Delete?", "Delete " + mi.CommandParameter + " from list?", "OK");
 
-            var item = (string)mi.CommandParameter;
-            movieItems.Remove(item);
+            MyListView.SelectedItem = mi;
+            movieItems.Remove((string)MyListView.SelectedItem);
         }
 
         private void SearchBar_OnTextChanged(object sender, TextChangedEventArgs e)
@@ -83,21 +97,6 @@ namespace MovieListApp
         //    }
 
         //    MyListView.EndRefresh();
-        //}
-
-                // no longer using
-        //public void OnMore(object sender, EventArgs e)
-        //{
-        //    var mi = ((MenuItem)sender);
-        //    DisplayAlert("Watched", "Mark " + mi.CommandParameter + " as watched?", "OK");
-
-        //    var strikethroughLabel = new Label { Text = "This is text with strikethrough.", TextDecorations = TextDecorations.Strikethrough };
-        //    MyListView.SelectedItem = strikethroughLabel;
-
-        //    //var layout = new StackLayout { Padding = new Thickness(5, 10) };
-        //    //var label = new Label { Text = "This is a green label.", TextColor = Color.FromHex("#77d065"), FontSize = 20 };
-        //    //layout.Children.Add(label);
-        //    //this.Content = layout;
         //}
     }
 }
